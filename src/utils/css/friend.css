@@ -1,0 +1,118 @@
+/* friend.css */
+
+.home-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.home-header h2 {
+  font-size: 22px;
+  margin: 0;
+}
+
+/* header row */
+.friends-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.friends-header h3 {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.friends-header .count {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.see-all {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+
+.see-all:hover {
+  text-decoration: underline;
+}
+
+/* horizontal friends row */
+.friends-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+/* individual friend */
+.friend {
+  width: 92px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.friend .name {
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 92px;
+}
+
+/* avatar circle */
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+}
+
+/* placeholder avatar (no profile pics yet) */
+.avatar.placeholder {
+  background: linear-gradient(
+    135deg,
+    #1e2128,
+    #2a2e38
+  );
+}
+
+/* add friend */
+.add-friend .avatar,
+.add-friend {
+  justify-content: center;
+}
+
+.add-friend {
+  background: var(--panel);
+  border: 1px dashed var(--border);
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-friend .plus {
+  font-size: 28px;
+  color: var(--muted);
+}
+
+.add-friend .label {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
