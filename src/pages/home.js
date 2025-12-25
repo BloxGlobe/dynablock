@@ -16,7 +16,7 @@ export default function Home(container) {
       </div>
 
       <div class="friends-header">
-        <h3>Connections <span class="count">(645)</span></h3>
+        <h3>Friends<span class="count">(0)</span></h3>
         <button class="see-all">See all →</button>
       </div>
 
@@ -44,6 +44,38 @@ export default function Home(container) {
         <div class="friend">
           <div class="avatar placeholder"></div>
           <span class="name">UserFour</span>
+        </div>
+
+        <div> class="friend">
+            <div class="avatar placeholder"></div>
+            <span class="name">UserFive</span>
+         </div>
+        
+        <div class="friend">
+          <div class="avatar placeholder"></div>
+          <span class="name">UserSix</span>
+        </div>
+
+        <div class="friend">
+          <div class="avatar placeholder"></div>
+          <span class="name">UserSeven</span>
+        </div>
+
+        <div class="friend">
+          <div class="avatar placeholder"></div>
+          <span class="name">UserEight</span>
+        </div>
+
+        <div class="friend">
+          <div class="avatar placeholder"></div>
+          <span class="name">UserNine</span>
+        </div>
+
+        <div class="friend">
+          <div class="avatar placeholder"></div>
+          <span class="name">UserTen</span>
+        </div>
+      
         </div>
       </div>
     </section>

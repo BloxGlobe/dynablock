@@ -1,8 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 
-/* ===============================
-   ROOT VARIABLES
-================================ */
 :root {
   --bg: #0b0d10;
   --panel: #14161a;
@@ -18,9 +15,8 @@
   --radius-sm: 6px;
 }
 
-/* ===============================
-   RESET & BASE
-================================ */
+/* reset and base styles */
+
 * {
   box-sizing: border-box;
 }
@@ -35,9 +31,8 @@ html, body {
   line-height: 1.55;
 }
 
-/* ===============================
-   APP LAYOUT
-================================ */
+/* app  layout */
+
 #app {
   display: flex;
   height: 100vh;
@@ -45,12 +40,12 @@ html, body {
   overflow: hidden;
 }
 
-/* ===============================
-   SIDEBAR
-================================ */
+/* sidebar */
+
 .sidebar {
   width: 270px;
   background: var(--panel);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
 }
@@ -115,22 +110,20 @@ html, body {
   flex-shrink: 0;
 }
 
-/* ===============================
-   MAIN CONTAINER
-================================ */
+/* main container */
+
 .main-container {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 
-  /* single clean vertical divider */
+  /*  clean vertical divider */
   border-left: 1px solid var(--border);
 }
 
-/* ===============================
-   TOP NAV
-================================ */
+/* top navigation bar */
+
 .top-nav {
   height: 60px;
   background: var(--panel);
@@ -148,9 +141,8 @@ html, body {
   gap: 14px;
 }
 
-/* ===============================
-   ICON BUTTONS
-================================ */
+/* icon buttons */
+
 .icon-btn {
   background: none;
   border: none;
@@ -168,9 +160,8 @@ html, body {
   color: var(--text);
 }
 
-/* ===============================
-   HORIZONTAL NAV
-================================ */
+/* horizontal nav */
+
 .horizontal-nav {
   display: flex;
   gap: 16px;
@@ -194,9 +185,8 @@ html, body {
   background: var(--accent-soft);
 }
 
-/* ===============================
-   SEARCH
-================================ */
+/* search */
+
 .search-container {
   display: flex;
   align-items: center;
@@ -224,9 +214,8 @@ html, body {
   color: var(--muted);
 }
 
-/* ===============================
-   NOTIFICATIONS
-================================ */
+/* notification badge */
+
 .notification-btn {
   position: relative;
 }
@@ -241,53 +230,22 @@ html, body {
   border-radius: 50%;
 }
 
-/* ===============================
-   PAGE CONTENT
-================================ */
+/* page content */
+
 .page-content {
   flex: 1;
   padding: 32px 36px;
   overflow-y: auto;
 }
 
-/* ===============================
-   HOME – FRIENDS
-================================ */
-.friends-section {
-  margin-top: 28px;
-}
+/* loading state */
 
-.friends-section h3 {
-  font-size: 14px;
-  margin-bottom: 12px;
-}
-
-.friends-list {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.friend-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px 14px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* ===============================
-   LOADING
-================================ */
 .loading {
   color: var(--muted);
   font-size: 13px;
 }
 
-/* ===============================
-   SCROLLBAR
-================================ */
+/* Scroll bar */
 ::-webkit-scrollbar {
   width: 6px;
 }
