@@ -16,14 +16,14 @@ export default function Home(container) {
       </div>
 
       <div class="friends-header">
-        <h3>Connections <span class="count">(645)</span></h3>
+        <h3> Friends <span class="count">(0)</span></h3>
         <button class="see-all">See all →</button>
       </div>
 
       <div class="friends-row">
         <div class="friend add-friend">
           <span class="plus">+</span>
-          <span class="label">Connect</span>
+          <span class="label">Add friend</span>
         </div>
 
         <div class="friend">
