@@ -43,7 +43,7 @@ html, body {
 /* sidebar */
 
 .sidebar {
-  width: 270px;
+  width: 290px; /* slightly wider = zoomed-out feel */
   background: var(--panel);
   border-right: 1px solid var(--border);
   display: flex;
@@ -51,8 +51,69 @@ html, body {
 }
 
 .sidebar-header {
-  padding: 22px;
+  padding: 24px 24px 20px;
   border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  margin: 0;
+  font-size: 16px; /* calmer */
+  font-weight: 600;
+}
+
+.version {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* nav container */
+.sidebar-nav {
+  flex: 1;
+  padding: 18px 14px; /* more air */
+  overflow-y: auto;
+}
+
+/* sections */
+.nav-section {
+  margin-bottom: 26px;
+}
+
+.nav-label {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1.1px;
+  margin: 14px 14px 8px;
+  text-transform: uppercase;
+}
+
+/* nav items */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px; /* not cramped */
+  margin: 4px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12.5px; /* slightly smaller = zoomed-out */
+  transition: background .15s, color .15s;
+}
+
+.nav-item:hover {
+  background: var(--panel-soft);
+  color: var(--text);
+}
+
+.nav-item.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.nav-icon {
+  flex-shrink: 0;
+  opacity: 0.9;
 }
 
 .logo {

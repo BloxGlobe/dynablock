@@ -9,6 +9,24 @@ export default function Home(container) {
     document.head.appendChild(link);
   }
 
+  // mock friend list (will be replaced by backend later)
+  const friends = [
+    "UserOne",
+    "UserTwo",
+    "UserThree",
+    "UserFour",
+    "UserFive",
+    "UserSix",
+    "UserSeven",
+    "UserEight",
+    "UserNine",
+    "UserTen"
+  ];
+
+  // show only a preview to avoid crowding
+  const MAX_VISIBLE = 7;
+  const visibleFriends = friends.slice(0, MAX_VISIBLE);
+
   container.innerHTML = `
     <section class="section home-section">
       <div class="home-header">
@@ -16,7 +34,7 @@ export default function Home(container) {
       </div>
 
       <div class="friends-header">
-        <h3>Friends<span class="count">(0)</span></h3>
+        <h3>Friends <span class="count">(${friends.length})</span></h3>
         <button class="see-all">See all →</button>
       </div>
 
@@ -26,57 +44,16 @@ export default function Home(container) {
           <span class="label">Connect</span>
         </div>
 
-        <div class="friend">
-          <div class="avatar placeholder"></div>
-          <span class="name">UserOne</span>
-        </div>
-
-        <div class="friend">
-          <div class="avatar placeholder"></div>
-          <span class="name">UserTwo</span>
-        </div>
-
-        <div class="friend">
-          <div class="avatar placeholder"></div>
-          <span class="name">UserThree</span>
-        </div>
-
-        <div class="friend">
-          <div class="avatar placeholder"></div>
-          <span class="name">UserFour</span>
-        </div>
-
-        <div> class="friend">
+        ${visibleFriends
+          .map(
+            name => `
+          <div class="friend">
             <div class="avatar placeholder"></div>
-            <span class="name">UserFive</span>
-         </div>
-        
-        <div class="friend">
-          <div class="avatar placeholder"></div>
-          <span class="name">UserSix</span>
-        </div>
-
-        <div class="friend">
-          <div class="avatar placeholder"></div>
-          <span class="name">UserSeven</span>
-        </div>
-
-        <div class="friend">
-          <div class="avatar placeholder"></div>
-          <span class="name">UserEight</span>
-        </div>
-
-        <div class="friend">
-          <div class="avatar placeholder"></div>
-          <span class="name">UserNine</span>
-        </div>
-
-        <div class="friend">
-          <div class="avatar placeholder"></div>
-          <span class="name">UserTen</span>
-        </div>
-      
-        </div>
+            <span class="name">${name}</span>
+          </div>
+        `
+          )
+          .join("")}
       </div>
     </section>
   `;
