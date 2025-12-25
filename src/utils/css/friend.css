@@ -1,4 +1,4 @@
-/* friend.css */
+/* friend.css - Friends section styling */
 
 .home-section {
   display: flex;
@@ -7,8 +7,9 @@
 }
 
 .home-header h2 {
-  font-size: 22px;
-  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
 }
 
 /* header row */
@@ -19,27 +20,30 @@
 }
 
 .friends-header h3 {
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   margin: 0;
 }
 
 .friends-header .count {
-  color: var(--muted);
+  color: var(--text-medium);
   font-weight: 400;
+  margin-left: 6px;
 }
 
 .see-all {
   background: none;
   border: none;
-  color: var(--accent);
-  font-size: 13px;
+  color: var(--blue);
+  font-size: 14px;
   cursor: pointer;
-  padding: 4px 6px;
+  padding: 6px 10px;
+  font-weight: 500;
+  transition: color 150ms;
 }
 
 .see-all:hover {
-  text-decoration: underline;
+  color: var(--blue-hover);
 }
 
 /* horizontal friends row */
@@ -52,7 +56,7 @@
 
 /* individual friend */
 .friend {
-  width: 92px;
+  width: 80px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -60,15 +64,17 @@
   gap: 8px;
   text-align: center;
   cursor: pointer;
+  position: relative;
 }
 
 .friend .name {
   font-size: 12px;
-  color: var(--text);
+  font-weight: 500;
+  color: var(--text-dark);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 92px;
+  max-width: 80px;
 }
 
 /* avatar circle */
@@ -76,43 +82,130 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: var(--panel-soft);
-  border: 1px solid var(--border);
-}
-
-/* placeholder avatar (no profile pics yet) */
-.avatar.placeholder {
-  background: linear-gradient(
-    135deg,
-    #1e2128,
-    #2a2e38
-  );
-}
-
-/* add friend */
-.add-friend .avatar,
-.add-friend {
-  justify-content: center;
-}
-
-.add-friend {
-  background: var(--panel);
-  border: 1px dashed var(--border);
-  border-radius: 50%;
-  width: 64px;
-  height: 64px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-dark);
+  transition: all 150ms;
+  position: relative;
+}
+
+.avatar:hover {
+  border-color: var(--blue);
+  transform: scale(1.05);
+}
+
+/* placeholder avatar (initials) */
+.avatar.placeholder {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-hover) 100%);
+}
+
+/* status indicator */
+.status-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-page);
+}
+
+.status-online { background-color: #10b981; }
+.status-away { background-color: #f59e0b; }
+.status-offline { background-color: #737373; }
+
+/* add friend */
+.add-friend {
+  cursor: pointer;
+}
+
+.add-friend .avatar {
+  border: 2px dashed var(--border-color);
+  background: transparent;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.add-friend .avatar:hover {
+  border-color: var(--blue);
+  background: rgba(37, 99, 235, 0.05);
 }
 
 .add-friend .plus {
   font-size: 28px;
-  color: var(--muted);
+  color: var(--text-medium);
+  font-weight: 300;
+  line-height: 1;
 }
 
 .add-friend .label {
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--muted);
+  font-size: 11px;
+  color: var(--text-medium);
+  font-weight: 500;
+}
+
+/* Friend dropdown menu */
+.friend-dropdown {
+  position: absolute;
+  top: 76px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 6px;
+  z-index: 100;
+  min-width: 160px;
+  display: none;
+}
+
+.friend-dropdown.show {
+  display: block;
+  animation: dropdownFade 150ms ease;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.friend-dropdown button {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-dark);
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 150ms;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.friend-dropdown button:hover {
+  background: var(--bg-hover);
+}
+
+.friend-dropdown button.danger {
+  color: #ef4444;
+}
+
+.friend-dropdown button.danger:hover {
+  background: rgba(239, 68, 68, 0.1);
 }
