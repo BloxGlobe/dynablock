@@ -117,6 +117,9 @@ html, body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  /*  clean vertical divider */
+  border-left: 1px solid var(--border);
 }
 
 /* top navigation bar */
