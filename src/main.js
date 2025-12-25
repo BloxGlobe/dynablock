@@ -30,7 +30,7 @@ async function loadAuthModule() {
 
   // delegate EVERYTHING to auth module
   const { mountAuth } = await import(
-    "./modules/Auth/auth.js"
+    "./modules/Auth/auth.py"
   );
 
   const container = document.querySelector(".page-content");
