@@ -2,17 +2,19 @@
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  padding: 8px 0 16px;
+  padding: 8px 4px 16px;
   align-items: flex-start;
+  scroll-behavior: smooth;
 }
 
+/* Friend card */
 .friend-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-width: 80px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.18s ease, opacity 0.18s ease;
 }
 
 .friend-item:hover {
@@ -34,6 +36,13 @@
   font-weight: 600;
   color: var(--text);
   position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover ring (Roblox-like) */
+.friend-item:hover .friend-avatar {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(43,124,255,0.25);
 }
 
 /* Add friend */
@@ -49,6 +58,7 @@
 
 .friend-avatar svg {
   color: var(--muted);
+  transition: color 0.2s ease;
 }
 
 .friend-item.add-friend:hover svg {
@@ -70,7 +80,7 @@
   color: var(--text);
 }
 
-/* Online indicator */
+/* Online / Offline indicator */
 .friend-avatar::after {
   content: "";
   position: absolute;
@@ -78,19 +88,29 @@
   right: 4px;
   width: 14px;
   height: 14px;
-  background: #22c55e;
-  border: 2px solid var(--panel);
   border-radius: 50%;
+  border: 2px solid var(--panel);
   display: none;
 }
 
+/* Online */
 .friend-item.online .friend-avatar::after {
   display: block;
+  background: #22c55e;
+}
+
+/* Offline (optional class) */
+.friend-item.offline {
+  opacity: 0.6;
 }
 
 /* Scrollbar */
 .friends-container::-webkit-scrollbar {
   height: 6px;
+}
+
+.friends-container::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .friends-container::-webkit-scrollbar-thumb {

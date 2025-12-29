@@ -1,11 +1,13 @@
+/* Layout */
 .communities-layout {
   display: flex;
   height: 100%;
   background: #0b0d10;
   color: #fff;
+  overflow: hidden;
 }
 
-/* Sidebar */
+/* ========== LEFT SIDEBAR (Communities list) ========== */
 .communities-sidebar {
   width: 280px;
   background: #14161a;
@@ -14,11 +16,14 @@
   border-right: 1px solid rgba(255,255,255,.08);
 }
 
+/* Header */
 .sidebar-header {
   padding: 16px;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 15px;
 }
 
+/* Search */
 .search-communities {
   padding: 0 16px 12px;
 }
@@ -26,12 +31,15 @@
 .search-communities input {
   width: 100%;
   padding: 8px;
+  padding-left: 32px;
   border-radius: 6px;
   border: none;
   background: #1b1e24;
   color: #fff;
+  outline: none;
 }
 
+/* Community list */
 .communities-list {
   flex: 1;
   overflow-y: auto;
@@ -40,12 +48,23 @@
 .community-item {
   padding: 12px 16px;
   cursor: pointer;
+  border-radius: 6px;
+  margin: 4px 8px;
+  transition: background .15s ease;
 }
 
 .community-item:hover {
   background: rgba(255,255,255,.06);
 }
 
+/* Empty */
+.empty {
+  padding: 16px;
+  opacity: .6;
+  font-size: 13px;
+}
+
+/* Create button */
 .create-community-btn {
   margin: 16px;
   padding: 10px;
@@ -54,19 +73,21 @@
   cursor: pointer;
   background: #2b7cff;
   color: #fff;
+  font-weight: 500;
 }
 
-.empty {
-  padding: 16px;
-  opacity: .6;
+.create-community-btn:hover {
+  opacity: .9;
 }
 
-/* Content */
+/* ========== CENTER CONTENT (Community view) ========== */
 .community-content {
   flex: 1;
   padding: 24px;
+  overflow-y: auto;
 }
 
+/* Empty state */
 .empty-state {
   opacity: .7;
 }
@@ -75,8 +96,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 16px;
 }
 
+/* Sections */
+.community-section {
+  margin-top: 24px;
+}
+
+/* Leave */
 .leave-btn {
   background: #ff3b3b;
   border: none;
@@ -86,12 +114,39 @@
   color: #fff;
 }
 
-.community-section {
-  margin-top: 24px;
+/* ========== RIGHT SIDEBAR (Community panel) ========== */
+.community-right-sidebar {
+  width: 260px;
+  background: #14161a;
+  border-left: 1px solid rgba(255,255,255,.08);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.shout-box {
-  background: #14161a;
+/* Right sidebar blocks */
+.right-panel-section {
+  background: #1b1e24;
   padding: 12px;
   border-radius: 6px;
+  font-size: 13px;
+}
+
+.right-panel-section h4 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  opacity: .9;
+}
+
+/* Scrollbars */
+.communities-sidebar::-webkit-scrollbar,
+.community-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.communities-sidebar::-webkit-scrollbar-thumb,
+.community-content::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.12);
+  border-radius: 4px;
 }
