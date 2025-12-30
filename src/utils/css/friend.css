@@ -1,123 +1,85 @@
+/* Friends row */
 .friends-container {
   display: flex;
-  gap: 16px;
+  gap: 14px;
+  padding: 8px 0 12px;
   overflow-x: auto;
-  padding: 8px 4px 16px;
-  align-items: flex-start;
-  scroll-behavior: smooth;
 }
 
-/* Friend card */
+/* Friend item */
 .friend-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 80px;
+  width: 72px;
+  text-align: center;
   cursor: pointer;
-  transition: transform 0.18s ease, opacity 0.18s ease;
-}
-
-.friend-item:hover {
-  transform: translateY(-4px);
+  flex-shrink: 0;
 }
 
 /* Avatar */
 .friend-avatar {
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 6px;
   border-radius: 50%;
-  background: var(--panel-soft);
-  border: 2px solid var(--border);
+  background: #1b1e24;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 6px;
-  font-size: 32px;
-  font-weight: 600;
-  color: var(--text);
+  color: #fff;
+  font-size: 20px;
   position: relative;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.15s ease;
 }
 
-/* Hover ring (Roblox-like) */
 .friend-item:hover .friend-avatar {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(43,124,255,0.25);
+  background: #2b7cff;
 }
 
 /* Add friend */
 .friend-item.add-friend .friend-avatar {
-  background: var(--panel);
-  border: 2px dashed var(--border);
+  background: transparent;
+  border: 2px dashed rgba(255,255,255,.3);
+  color: rgba(255,255,255,.7);
 }
 
 .friend-item.add-friend:hover .friend-avatar {
-  border-color: var(--accent);
-  background: var(--panel-soft);
-}
-
-.friend-avatar svg {
-  color: var(--muted);
-  transition: color 0.2s ease;
-}
-
-.friend-item.add-friend:hover svg {
-  color: var(--accent);
+  background: #1b1e24;
+  border-color: #2b7cff;
+  color: #2b7cff;
 }
 
 /* Name */
 .friend-name {
   font-size: 12px;
-  color: var(--muted);
-  text-align: center;
-  max-width: 80px;
-  overflow: hidden;
+  color: rgba(255,255,255,.75);
   white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.friend-item:hover .friend-name {
-  color: var(--text);
-}
-
-/* Online / Offline indicator */
+/* Online dot */
 .friend-avatar::after {
   content: "";
   position: absolute;
   bottom: 4px;
   right: 4px;
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
+  background: #22c55e;
+  border: 2px solid #0b0d10;
   border-radius: 50%;
-  border: 2px solid var(--panel);
   display: none;
 }
 
-/* Online */
 .friend-item.online .friend-avatar::after {
   display: block;
-  background: #22c55e;
 }
 
-/* Offline (optional class) */
-.friend-item.offline {
-  opacity: 0.6;
-}
-
-/* Scrollbar */
+/* Scrollbar (subtle) */
 .friends-container::-webkit-scrollbar {
-  height: 6px;
-}
-
-.friends-container::-webkit-scrollbar-track {
-  background: transparent;
+  height: 5px;
 }
 
 .friends-container::-webkit-scrollbar-thumb {
-  background: var(--panel-soft);
+  background: rgba(255,255,255,.2);
   border-radius: 4px;
-}
-
-.friends-container::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
 }
