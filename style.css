@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,25 +10,30 @@ html, body {
   width: 100%;
 }
 
-body {
-  font-family: Arial, Tahoma, "Trebuchet MS", Verdana, sans-serif;
-  background: #1a1a1a;
-  color: #ffffff;
-  line-height: 1.6;
-}
-
 :root {
-  --bg: #1a1a1a;
-  --panel: #2a2a2a;
-  --panel-soft: #353535;
-  --border: rgba(255,255,255,0.1);
+  --bg: #0f1115;              
+  --panel: #1c1f26;
+  --panel-soft: #262a33;
+  --border: rgba(255,255,255,0.08);
+
   --text: #ffffff;
   --muted: rgba(255,255,255,0.6);
+
   --accent: #4a90e2;
   --accent-hover: #357abd;
+
   --friend-online: #4ade80;
   --friend-offline: #ff5c5c;
 }
+
+
+body {
+  font-family: Arial, Tahoma, "Trebuchet MS", Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
 
 .top-nav {
   height: 56px;
@@ -52,10 +58,7 @@ body {
   font-family: Arial Black, Arial, sans-serif;
   font-size: 18px;
   font-weight: 900;
-  background: linear-gradient(90deg, #e74c3c 0%, #e67e22 20%, #f39c12 40%, #2ecc71 60%, #3498db 80%, #9b59b6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
 }
 
 .nav-links {
@@ -67,9 +70,8 @@ body {
   text-decoration: none;
   color: var(--muted);
   font-size: 14px;
-  transition: color 0.2s ease;
-  position: relative;
   padding: 4px 0;
+  transition: color 0.2s ease;
 }
 
 .nav-link:hover,
@@ -99,6 +101,7 @@ body {
 .search-bar input::placeholder {
   color: var(--muted);
 }
+
 
 .nav-right {
   display: flex;
@@ -137,11 +140,11 @@ body {
   width: 100%;
 }
 
+
 .page-title {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 40px;
-  color: var(--text);
 }
 
 .section {
@@ -158,22 +161,19 @@ body {
 .section-title {
   font-size: 18px;
   font-weight: bold;
-  color: var(--text);
 }
 
 .see-all {
   text-decoration: none;
   color: var(--muted);
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
   transition: color 0.2s ease;
 }
 
 .see-all:hover {
   color: var(--text);
 }
+
 
 .library-grid,
 .continue-grid {
@@ -214,25 +214,22 @@ body {
   position: absolute;
   top: 8px;
   left: 8px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0,0,0,0.8);
   padding: 4px 10px;
   border-radius: 3px;
   font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .card-content {
   padding: 14px;
-  background: var(--panel);
 }
 
 .card-title {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 6px;
-  color: var(--text);
 }
 
 .card-rating {
@@ -247,6 +244,7 @@ body {
   color: #4ade80;
 }
 
+
 .library-grid:empty::after,
 .continue-grid:empty::after {
   content: "Empty";
@@ -255,15 +253,38 @@ body {
   border: 1px solid var(--border);
   border-radius: 4px;
   color: var(--muted);
-  font-size: 14px;
   text-align: center;
   grid-column: 1 / -1;
-  display: block;
 }
+
+.chat-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, background 0.2s ease;
+  z-index: 99;
+}
+
+.chat-fab:hover {
+  background: var(--accent-hover);
+  transform: scale(1.1);
+}
+
+.chat-fab svg {
+  color: var(--text);
+}
+
 
 ::-webkit-scrollbar {
   width: 10px;
-  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -279,58 +300,26 @@ body {
   background: var(--accent);
 }
 
-button {
-  font-family: inherit;
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-.chat-fab {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 56px;
-  height: 56px;
-  background: var(--accent);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, background 0.2s ease;
-  z-index: 99;
-}
-
-.chat-fab:hover {
-  background: var(--accent-hover);
-  transform: scale(1.1);
-}
-
-.chat-fab svg {
-  color: var(--text);
-}
 
 @media (max-width: 768px) {
   .main-content {
     padding: 24px 16px;
   }
-  
+
   .nav-links {
     display: none;
   }
-  
+
   .page-title {
     font-size: 24px;
   }
-  
+
   .library-grid,
   .continue-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 16px;
   }
-  
+
   .search-bar input {
     width: 150px;
   }
