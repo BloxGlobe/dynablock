@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "svelte-spa-router": "^4.0.1"
+    "svelte-spa-router": "^4.0.1",
+    "webpack.config.js": "^0.0.0"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
