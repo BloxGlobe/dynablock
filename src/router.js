@@ -21,11 +21,22 @@ export default function initRouter() {
       const module = await import(`./pages/${page}.js`);
       container.innerHTML = "";
       module.default(container);
-    } catch {
-      container.innerHTML = `
-        <h1>404</h1>
-        <p>Page "${page}" not found.</p>
-      `;
+    } catch (err) {
+      // 404 handler T-T
+      try {
+        const { default: render404 } = await import(
+          "./pages/other-modules/Page-Not-Found/renders/render404.js"
+        );
+
+        container.innerHTML = "";
+        render404(container, page);
+      } catch (e) {
+        // fallback
+        container.innerHTML = `
+          <h1>404</h1>
+          <p>Page "${page}" not found.</p>
+        `;
+      }
     }
   }
 
@@ -37,19 +48,19 @@ export default function initRouter() {
     }
   }
 
-
+  // navbar clicks
   links.forEach(link => {
     link.addEventListener("click", () => {
       navigate(link.dataset.page);
     });
   });
 
-
+  // back / forward / direct URL
   window.addEventListener("hashchange", () => {
     const page = location.hash.replace("#", "") || "home";
     render(page);
   });
 
-
-  navigate(location.hash.replace("#", "") || "home");
+  // initial load
+  render(location.hash.replace("#", "") || "home");
 }

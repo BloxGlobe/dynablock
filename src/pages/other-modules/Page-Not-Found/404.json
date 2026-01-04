@@ -1,0 +1,14 @@
+{
+  "title": "Page not found",
+  "code": 404,
+  "subtitle": "We couldn’t find what you were looking for.",
+  "description": "The page may have been moved, deleted, or never existed.",
+  "button": {
+    "label": "Go back home",
+    "href": "https://dynablock1.vercel.app/#home"
+  },
+  "style": {
+    "theme": "dark",
+    "align": "center"
+  }
+}
