@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DynaBlocks<title>
+  <title>DynaBlocks</title>
 
   <!-- Global styles -->
   <link rel="stylesheet" href="style.css" />
@@ -41,11 +41,10 @@
 
     <!-- Right Icons -->
     <div class="nav-right">
-      <a
-        href="#"
+      <button
         class="icon-btn settings-btn"
         aria-label="Settings"
-        onclick="openSettings(event)"
+        onclick="openSettings?.(event)"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="3"></circle>
@@ -54,7 +53,7 @@
           <path d="M1 12h6m6 0h6"></path>
           <path d="m4.93 19.07 4.24-4.24m5.66-5.66 4.24-4.24"></path>
         </svg>
-      </a>
+      </button>
     </div>
   </nav>
 
@@ -68,7 +67,6 @@
 
   <script type="module">
     import initFooter from "./src/components/common/footer.js";
-
     const footerRoot = document.getElementById("footer-root");
     if (footerRoot) initFooter(footerRoot);
   </script>
