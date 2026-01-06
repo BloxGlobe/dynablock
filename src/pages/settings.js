@@ -10,15 +10,66 @@ if (!document.getElementById("settings-css")) {
 }
 
 let settingsOpen = false;
+let sessionManager = null;
 
+/**
+ * Initialize session manager reference
+ * Called from main.js
+ */
+export function setSessionManager(manager) {
+  sessionManager = manager;
+}
+
+/**
+ * Get current user from session
+ */
+function getCurrentUser() {
+  if (sessionManager && sessionManager.user) {
+    return sessionManager.user;
+  }
+  
+  // Fallback to global SessionManager
+  if (window.SessionManager && window.SessionManager.user) {
+    return window.SessionManager.user;
+  }
+  
+  return null;
+}
+
+/**
+ * Initialize settings panel
+ */
 export function initSettings(anchorEl) {
   if (settingsOpen || !anchorEl) return;
 
+  const user = getCurrentUser();
+  
   const panel = document.createElement("div");
   panel.id = "settings-panel";
 
   panel.innerHTML = `
     <div class="settings-dropdown">
+      
+      ${user ? `
+        <div class="settings-user-info">
+          <div class="user-avatar">
+            ${getUserInitials(user.username)}
+          </div>
+          <div class="user-details">
+            <div class="user-name">${escapeHtml(user.username)}</div>
+            <div class="user-email">${escapeHtml(user.email)}</div>
+          </div>
+        </div>
+        <div class="settings-divider"></div>
+      ` : ''}
+
+      <button class="settings-item" data-action="account">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Account Info
+      </button>
 
       <button class="settings-item" data-action="settings">
         <svg viewBox="0 0 24 24">
@@ -36,26 +87,39 @@ export function initSettings(anchorEl) {
         Help & Safety
       </button>
 
-      <button class="settings-item" data-action="switch">
-        <svg viewBox="0 0 24 24">
-          <path d="M16 3h5v5"/>
-          <path d="M21 3l-7 7"/>
-          <path d="M8 21H3v-5"/>
-          <path d="M3 21l7-7"/>
-        </svg>
-        Switch Accounts
-      </button>
+      ${user ? `
+        <div class="settings-divider"></div>
 
-      <div class="settings-divider"></div>
+        <button class="settings-item" data-action="switch">
+          <svg viewBox="0 0 24 24">
+            <path d="M16 3h5v5"/>
+            <path d="M21 3l-7 7"/>
+            <path d="M8 21H3v-5"/>
+            <path d="M3 21l7-7"/>
+          </svg>
+          Switch Accounts
+        </button>
 
-      <button class="settings-item danger" data-action="logout">
-        <svg viewBox="0 0 24 24">
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-          <path d="M16 17l5-5-5-5"/>
-          <path d="M21 12H9"/>
-        </svg>
-        Logout
-      </button>
+        <button class="settings-item danger" data-action="logout">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <path d="M16 17l5-5-5-5"/>
+            <path d="M21 12H9"/>
+          </svg>
+          Logout
+        </button>
+      ` : `
+        <div class="settings-divider"></div>
+
+        <button class="settings-item" data-action="login">
+          <svg viewBox="0 0 24 24">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/>
+            <line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          Login
+        </button>
+      `}
 
     </div>
   `;
@@ -70,6 +134,9 @@ export function initSettings(anchorEl) {
   document.addEventListener("keydown", escClose);
 }
 
+/**
+ * Handle menu item actions
+ */
 function handleAction(e) {
   const btn = e.target.closest(".settings-item");
   if (!btn) return;
@@ -77,33 +144,100 @@ function handleAction(e) {
   const action = btn.dataset.action;
 
   switch (action) {
+    case "account":
+      console.log("Open account info page");
+      if (window.navigateToPage) {
+        window.navigateToPage('account');
+      }
+      break;
+
     case "settings":
       console.log("Open settings page");
+      if (window.navigateToPage) {
+        window.navigateToPage('settings');
+      }
       break;
 
     case "help":
       console.log("Open help & safety");
+      if (window.navigateToPage) {
+        window.navigateToPage('help');
+      }
       break;
 
     case "switch":
-      console.log("Switch accounts (future)");
+      console.log("Switch accounts");
+      if (window.openAccountSwitcher) {
+        window.openAccountSwitcher();
+      }
       break;
 
     case "logout":
-      console.log("Logout via auth (soon)");
-      // later → Auth.logout()
+      console.log("Logging out...");
+      handleLogout();
+      break;
+
+    case "login":
+      console.log("Navigate to login");
+      if (window.navigateToPage) {
+        window.navigateToPage('login');
+      }
       break;
   }
 
   closeSettings();
 }
 
-function positionPanel(panel, anchor) {
-  const rect = anchor.getBoundingClientRect();
-  panel.style.top = `${rect.bottom + 8}px`;
-  panel.style.right = `${window.innerWidth - rect.right}px`;
+/**
+ * Handle logout action
+ */
+function handleLogout() {
+  const confirmed = confirm("Are you sure you want to logout?");
+  
+  if (!confirmed) return;
+
+  // Call logout from SessionManager
+  if (window.SessionManager && typeof window.SessionManager.logout === 'function') {
+    window.SessionManager.logout();
+  } else if (sessionManager && typeof sessionManager.logout === 'function') {
+    sessionManager.logout();
+  }
+
+  // Navigate to home or login page
+  if (window.navigateToPage) {
+    window.navigateToPage('home');
+  }
+
+  // Show success message
+  showNotification("You have been logged out successfully", "success");
 }
 
+/**
+ * Position the settings panel
+ */
+function positionPanel(panel, anchor) {
+  const rect = anchor.getBoundingClientRect();
+  
+  panel.style.top = `${rect.bottom + 8}px`;
+  panel.style.right = `${window.innerWidth - rect.right}px`;
+  
+  // Make sure panel doesn't go off-screen
+  setTimeout(() => {
+    const panelRect = panel.getBoundingClientRect();
+    
+    if (panelRect.right > window.innerWidth) {
+      panel.style.right = '8px';
+    }
+    
+    if (panelRect.bottom > window.innerHeight) {
+      panel.style.top = `${rect.top - panelRect.height - 8}px`;
+    }
+  }, 0);
+}
+
+/**
+ * Close settings panel
+ */
 function closeSettings() {
   const panel = document.getElementById("settings-panel");
   if (!panel) return;
@@ -114,6 +248,9 @@ function closeSettings() {
   document.removeEventListener("keydown", escClose);
 }
 
+/**
+ * Close panel when clicking outside
+ */
 function outsideClose(e) {
   const panel = document.getElementById("settings-panel");
   if (
@@ -125,8 +262,63 @@ function outsideClose(e) {
   }
 }
 
+/**
+ * Close panel on Escape key
+ */
 function escClose(e) {
   if (e.key === "Escape") closeSettings();
+}
+
+/**
+ * Get user initials for avatar
+ */
+function getUserInitials(username) {
+  if (!username) return "U";
+  
+  const parts = username.split(' ');
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+  return username.substring(0, 2).toUpperCase();
+}
+
+/**
+ * Escape HTML to prevent XSS
+ */
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+/**
+ * Show notification message
+ */
+function showNotification(message, type = "info") {
+  const notification = document.createElement("div");
+  notification.className = `notification notification-${type}`;
+  notification.textContent = message;
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.opacity = '0';
+    notification.style.transition = 'opacity 0.3s';
+    setTimeout(() => {
+      notification.remove();
+    }, 300);
+  }, 3000);
 }
 
 /* global hook for navbar */
